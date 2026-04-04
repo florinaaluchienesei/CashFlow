@@ -1,0 +1,32 @@
+<section class="login">
+  <div class="card">
+    <h1>Create account</h1>
+    <p class="subtitle">Register to start tracking your transactions.</p>
+
+    <form class="form" (ngSubmit)="onRegister()">
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" [(ngModel)]="name" placeholder="Your name" required />
+      </label>
+
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" required />
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••" required />
+      </label>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <button type="submit" class="btn">Create account</button>
+
+      <p class="hint">
+        Already have an account?
+        <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</section>

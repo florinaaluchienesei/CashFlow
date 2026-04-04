@@ -1,0 +1,27 @@
+<section class="login">
+  <div class="card">
+    <h1>Welcome back</h1>
+    <p class="subtitle">Log in to continue tracking your income and expenses.</p>
+
+    <form class="form" (ngSubmit)="onLogin()">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" required />
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••" required />
+      </label>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <button type="submit" class="btn">Login</button>
+
+      <p class="hint">
+        No account yet?
+        <a routerLink="/register">Create one</a>
+      </p>
+    </form>
+  </div>
+</section>
