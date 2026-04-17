@@ -1,4 +1,108 @@
-<section class="wrap">
-  <h1>Transactions</h1>
-  <p>Here you will add income and expense transactions (next step).</p>
+<section class="transactions-page">
+  <div class="card">
+    <h1>Transactions</h1>
+    <p class="subtitle">Add and manage your income and expenses.</p>
+
+    <div class="form-card">
+      <div class="form">
+        <label class="field">
+          <span>Title</span>
+          <input
+            type="text"
+            [(ngModel)]="newTransaction.title"
+            placeholder="Ex: Salary / Rent / Food"
+          />
+        </label>
+
+        <label class="field">
+          <span>Amount</span>
+          <input
+            type="number"
+            [(ngModel)]="newTransaction.amount"
+            placeholder="0"
+          />
+        </label>
+
+        <label class="field">
+          <span>Type</span>
+          <select [(ngModel)]="newTransaction.type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </label>
+
+        <div class="field">
+          <span>Choose account</span>
+          <div class="currency-switch">
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newTransaction.currency === 'RON'"
+              (click)="newTransaction.currency = 'RON'"
+            >
+              🇷🇴 RON
+            </button>
+
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newTransaction.currency === 'EUR'"
+              (click)="newTransaction.currency = 'EUR'"
+            >
+              🇪🇺 EUR
+            </button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Date</span>
+          <input
+            type="date"
+            [(ngModel)]="newTransaction.date"
+          />
+        </label>
+
+        <button class="btn" type="button" (click)="addTransaction()">
+          Add Transaction
+        </button>
+      </div>
+    </div>
+
+    <div class="list" *ngIf="transactions.length > 0; else emptyState">
+      <div class="transaction-item" *ngFor="let transaction of transactions">
+        <div class="transaction-left">
+          <div class="transaction-icon" [ngClass]="transaction.type">
+            <span *ngIf="transaction.type === 'income'">💰</span>
+            <span *ngIf="transaction.type === 'expense'">💸</span>
+          </div>
+
+          <div class="transaction-info">
+            <strong>{{ transaction.title }}</strong>
+            <p>
+              {{ transaction.date }} •
+
+              <span *ngIf="transaction.currency === 'RON'">🇷🇴 RON</span>
+              <span *ngIf="transaction.currency === 'EUR'">🇪🇺 EUR</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="transaction-right">
+          <span class="amount" [ngClass]="transaction.type">
+            {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount }}
+            <span *ngIf="transaction.currency === 'RON'">🇷🇴 RON</span>
+            <span *ngIf="transaction.currency === 'EUR'">🇪🇺 EUR</span>
+          </span>
+
+          <button class="delete-btn" (click)="deleteTransaction(transaction._id!)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyState>
+      <p class="empty">No transactions yet.</p>
+    </ng-template>
+  </div>
 </section>

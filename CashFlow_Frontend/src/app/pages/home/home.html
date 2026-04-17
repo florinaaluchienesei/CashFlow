@@ -1,20 +1,20 @@
-<section class="home">
-  <h1>Manage your personal finances with ease</h1>
+<section class="home-page">
+  <div class="hero">
+    <div class="hero-card">
+      <h1>Manage your personal finances with ease</h1>
+      <p>
+        CashFlow is a personal finance web application that helps you track your
+        income and expenses in one place. You can add transactions, view your
+        total income, total expenses, and current balance in real time.
+      </p>
 
-  <p class="description">
-    CashFlow is a personal finance web application that helps you track your income
-    and expenses in one place. You can add transactions, view your total income,
-    total expenses, and current balance in real time. The goal of the app is to give
-    you a clear overview of your money and help you make better financial decisions.
-  </p>
+      <button class="btn" (click)="goToStart()">Get Started</button>
 
-  <div class="actions">
-    <a routerLink="/login" class="btn primary">Get Started</a>
+      <div class="images">
+        <img src="assets/images/cashflow.png" alt="finance image 1" />
+        <img src="assets/images/chart.jpg" alt="finance image 2" />
+        <img src="assets/images/money.jpg" alt="finance image 3" />
+      </div>
+    </div>
   </div>
-
- <div class="images">
-<img src="assets/images/money.jpg" alt="Money" />
-<img src="assets/images/cashflow.png" alt="Transactions preview" />
-<img src="assets/images/chart.jpg" alt="Chart" />
-</div>
 </section>

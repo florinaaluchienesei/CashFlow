@@ -3,25 +3,25 @@
     <h1>Welcome back</h1>
     <p class="subtitle">Log in to continue tracking your income and expenses.</p>
 
-    <form class="form" (ngSubmit)="onLogin()">
+    <div class="form">
       <label class="field">
         <span>Email</span>
-        <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" required />
+        <input type="email" [(ngModel)]="email" placeholder="Enter your email" />
       </label>
 
       <label class="field">
         <span>Password</span>
-        <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••" required />
+        <input type="password" [(ngModel)]="password" placeholder="Enter your password" />
       </label>
+
+      <button class="btn" type="button" (click)="onLogin()">Login</button>
 
       <p class="error" *ngIf="error">{{ error }}</p>
 
-      <button type="submit" class="btn">Login</button>
-
       <p class="hint">
-        No account yet?
+        Don’t have an account?
         <a routerLink="/register">Create one</a>
       </p>
-    </form>
+    </div>
   </div>
 </section>

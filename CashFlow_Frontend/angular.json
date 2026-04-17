@@ -18,9 +18,11 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {
-          "builder": "@angular/build:application",
-          "options": {
+            "build": {
+      "builder": "@angular/build:application",
+      "options": {
+        "polyfills": ["zone.js"],
+        "outputPath": "dist/app",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",

@@ -1,28 +1,24 @@
-<header class="navbar">
+<nav class="navbar">
   <div class="navbar-inner">
-    <span class="logo">CashFlow</span>
+    <div class="logo">CashFlow</div>
 
-    <nav class="nav-links">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <div class="nav-links">
+      <a routerLink="/transactions">Transactions</a>
+      <a routerLink="/balance">Balance</a>
+    </div>
 
-      <!-- NOT logged in -->
-      <ng-container *ngIf="!user">
-        <a routerLink="/login" routerLinkActive="active">Login</a>
-        <a routerLink="/register" routerLinkActive="active">Register</a>
-      </ng-container>
+    <div class="auth">
+      <a routerLink="/login" *ngIf="!auth.isLoggedIn()">Login</a>
+      <a routerLink="/register" *ngIf="!auth.isLoggedIn()">Register</a>
 
-      <!-- logged in -->
-      <ng-container *ngIf="user">
-        <a routerLink="/transactions" routerLinkActive="active">Transactions</a>
-        <a routerLink="/balance" routerLinkActive="active">Current Balance</a>
-
-        <span class="hello">Hello, {{ user?.name }}</span>
-        <button class="logout" (click)="logout()">Logout</button>
-      </ng-container>
-    </nav>
+      <span class="hello" *ngIf="auth.isLoggedIn()">Hello!</span>
+      <button class="logout" *ngIf="auth.isLoggedIn()" (click)="logout()">
+        Logout
+      </button>
+    </div>
   </div>
-</header>
+</nav>
 
-<main class="page">
+<div class="page">
   <router-outlet></router-outlet>
-</main>
+</div>

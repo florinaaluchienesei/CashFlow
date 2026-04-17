@@ -1,4 +1,68 @@
-<section class="wrap">
-  <h1>Current Balance</h1>
-  <p>Here you will see total income, total expenses and balance (next step).</p>
+<section class="balance-page">
+  <div class="card">
+    <h1>Accounts Balance</h1>
+    <p class="subtitle">Overview of your RON and EUR accounts.</p>
+
+    <div class="currency-switch">
+      <button
+        type="button"
+        class="currency-btn"
+        [class.active]="selectedCurrency === 'RON'"
+        (click)="selectCurrency('RON')"
+      >
+        🇷🇴 RON
+      </button>
+
+      <button
+        type="button"
+        class="currency-btn"
+        [class.active]="selectedCurrency === 'EUR'"
+        (click)="selectCurrency('EUR')"
+      >
+        🇪🇺 EUR
+      </button>
+    </div>
+
+    <div class="balance-grid" *ngIf="selectedCurrency === 'RON'">
+      <div class="balance-box total">
+        <h3>🇷🇴 RON Account</h3>
+        <p>{{ ronBalance }} RON</p>
+      </div>
+    </div>
+
+    <div class="balance-grid" *ngIf="selectedCurrency === 'EUR'">
+      <div class="balance-box total">
+        <h3>🇪🇺 EUR Account</h3>
+        <p>{{ eurBalance }} EUR</p>
+      </div>
+    </div>
+
+    <div class="details-grid" *ngIf="selectedCurrency === 'RON'">
+      <div class="detail-card income">
+        <h4>🇷🇴 RON Income</h4>
+        <p>{{ ronIncome }} RON</p>
+      </div>
+
+      <div class="detail-card expense">
+        <h4>🇷🇴 RON Expense</h4>
+        <p>{{ ronExpense }} RON</p>
+      </div>
+    </div>
+
+    <div class="details-grid" *ngIf="selectedCurrency === 'EUR'">
+      <div class="detail-card income">
+        <h4>🇪🇺 EUR Income</h4>
+        <p>{{ eurIncome }} EUR</p>
+      </div>
+
+      <div class="detail-card expense">
+        <h4>🇪🇺 EUR Expense</h4>
+        <p>{{ eurExpense }} EUR</p>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <canvas id="balanceChart"></canvas>
+    </div>
+  </div>
 </section>
