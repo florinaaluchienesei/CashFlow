@@ -1,40 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Transaction } from '../pages/transactions/transaction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
+  private apiUrl = 'http://localhost:3000/api/transactions';
 
-  private transactions: Transaction[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
-  getTransactions(): Transaction[] {
-    return this.transactions;
+  getTransactions(userId: string) {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/${userId}`);
   }
 
-  addTransaction(transaction: Transaction): void {
-    this.transactions.push(transaction);
+  addTransaction(transaction: Transaction) {
+    return this.http.post(this.apiUrl, transaction);
   }
 
-  deleteTransaction(id: number): void {
-    this.transactions = this.transactions.filter(t => t.id !== id);
+  deleteTransaction(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getTotalIncome(): number {
-    return this.transactions
-      .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + t.amount, 0);
-  }
-
-  getTotalExpense(): number {
-    return this.transactions
-      .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + t.amount, 0);
-  }
-
-  getBalance(): number {
-    return this.getTotalIncome() - this.getTotalExpense();
+  getBalance(userId: string) {
+    return this.http.get<any>(`${this.apiUrl}/balance/${userId}`);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from './transaction';
@@ -14,15 +15,15 @@ import { Transaction } from './transaction';
   styleUrls: ['./transactions.scss']
 })
 export class Transactions implements OnInit {
-
   transactions: Transaction[] = [];
 
   newTransaction: Transaction = {
-    id: 0,
     title: '',
     amount: 0,
     type: 'income',
-    date: ''
+    date: '',
+    userId: '',
+    currency: 'RON'
   };
 
   constructor(
@@ -32,7 +33,9 @@ export class Transactions implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.auth.isLoggedIn()) {
+    const user = this.auth.getUser();
+
+    if (!user) {
       this.router.navigateByUrl('/login');
       return;
     }
@@ -41,10 +44,25 @@ export class Transactions implements OnInit {
   }
 
   loadTransactions(): void {
-    this.transactions = this.transactionService.getTransactions();
+    const user = this.auth.getUser();
+
+    if (!user) return;
+
+    this.transactionService.getTransactions(user._id || user.id).subscribe({
+      next: (data) => {
+        this.transactions = data;
+      },
+      error: (err) => {
+        console.log('Eroare load:', err);
+      }
+    });
   }
 
   addTransaction(): void {
+    const user = this.auth.getUser();
+
+    if (!user) return;
+
     if (
       this.newTransaction.title.trim() === '' ||
       this.newTransaction.amount <= 0 ||
@@ -56,23 +74,36 @@ export class Transactions implements OnInit {
 
     const transactionToAdd: Transaction = {
       ...this.newTransaction,
-      id: Date.now()
+      userId: user._id || user.id
     };
 
-    this.transactionService.addTransaction(transactionToAdd);
-    this.loadTransactions();
+    this.transactionService.addTransaction(transactionToAdd).subscribe({
+      next: () => {
+        this.loadTransactions();
 
-    this.newTransaction = {
-      id: 0,
-      title: '',
-      amount: 0,
-      type: 'income',
-      date: ''
-    };
+        this.newTransaction = {
+          title: '',
+          amount: 0,
+          type: 'income',
+          date: '',
+          userId: '',
+          currency: 'RON'
+        };
+      },
+      error: (err) => {
+        console.log('EROARE ADD:', err);
+      }
+    });
   }
 
-  deleteTransaction(id: number): void {
-    this.transactionService.deleteTransaction(id);
-    this.loadTransactions();
+  deleteTransaction(id: string): void {
+    this.transactionService.deleteTransaction(id).subscribe({
+      next: () => {
+        this.loadTransactions();
+      },
+      error: (err) => {
+        console.log('EROARE DELETE:', err);
+      }
+    });
   }
 }

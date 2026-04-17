@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './register.html',
-  styleUrls: ['./register.scss'],
+  styleUrls: ['./register.scss']
 })
 export class Register {
   name = '';
@@ -17,16 +17,23 @@ export class Register {
   password = '';
   error = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onRegister() {
-    this.error = '';
-    const res = this.auth.register(this.name, this.email, this.password);
-    if (!res.ok) {
-      this.error = res.message;
-      return;
-    }
+  onRegister(): void {
+    const userData = {
+      name: this.name,
+      email: this.email,
+      password: this.password
+    };
 
-    this.router.navigateByUrl('/login');
+    this.authService.register(userData).subscribe({
+      next: (response) => {
+        alert('Cont creat cu succes!');
+        this.router.navigateByUrl('/login');
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Eroare la înregistrare';
+      }
+    });
   }
 }
