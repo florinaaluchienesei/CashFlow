@@ -28,7 +28,7 @@ export class Login {
       next: (response) => {
         this.authService.saveUser(response.user);
         alert('Login reușit!');
-        this.router.navigateByUrl('/transactions');
+        this.router.navigateByUrl('/dashboard');
       },
       error: (err) => {
         this.error = err.error?.message || 'Eroare la autentificare';

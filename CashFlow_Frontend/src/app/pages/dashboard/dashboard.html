@@ -1,0 +1,65 @@
+<section class="dashboard-page">
+  <div class="dashboard-header">
+    <h1>Welcome to CashFlow</h1>
+    <p>Your personal financial overview.</p>
+  </div>
+
+    <div class="health-card">
+    <div>
+      <h2>Financial Health</h2>
+      <p>{{ financialHealthMessage }}</p>
+    </div>
+
+    <div class="health-score">
+      {{ financialHealthScore }}
+      <span>/100</span>
+    </div>
+  </div>
+
+  <div class="alerts-card">
+    <h2>Smart Alerts</h2>
+
+    <div class="alert-item" *ngFor="let alert of smartAlerts">
+      <span>⚡</span>
+      <p>{{ alert }}</p>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card balance">
+      <span class="icon">🇷🇴</span>
+      <h3>RON Balance</h3>
+      <p>{{ ronBalance }} RON</p>
+    </div>
+
+    <div class="dashboard-card balance">
+      <span class="icon">🇪🇺</span>
+      <h3>EUR Balance</h3>
+      <p>{{ eurBalance }} EUR</p>
+    </div>
+
+    <div class="dashboard-card savings">
+      <span class="icon">🏦</span>
+      <h3>RON Savings</h3>
+      <p>{{ ronSavings }} RON</p>
+    </div>
+
+    <div class="dashboard-card savings">
+      <span class="icon">💶</span>
+      <h3>EUR Savings</h3>
+      <p>{{ eurSavings }} EUR</p>
+    </div>
+
+    <div class="dashboard-card goals">
+      <span class="icon">🎯</span>
+      <h3>Active Goals</h3>
+      <p>{{ goalsCount }}</p>
+    </div>
+
+    <div class="dashboard-card recommendation">
+      <span class="icon">💡</span>
+      <h3>Smart Recommendation</h3>
+      <p>{{ recommendation }}</p>
+    </div>
+  </div>
+</section>

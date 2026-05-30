@@ -1,0 +1,61 @@
+<div class="card-wrapper">
+
+<div class="bank-card">
+
+<div class="chip"></div>
+
+<h2>CashFlow Premium</h2>
+
+<p class="number">
+{{ cardNumber }}
+</p>
+
+<div class="bottom">
+
+<div>
+<span>Holder</span>
+
+<strong>
+{{ cardHolder }}
+</strong>
+</div>
+
+<div>
+<span>Balance</span>
+
+<strong>
+{{ balance }} RON
+</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="status">
+
+<p>
+
+Status:
+
+<span
+[class.active]="cardStatus"
+[class.blocked]="!cardStatus"
+>
+
+{{ cardStatus ? 'Active' : 'Blocked' }}
+
+</span>
+
+</p>
+
+<button
+(click)="toggleCard()">
+
+{{ cardStatus ? 'Freeze Card' : 'Unfreeze Card' }}
+
+</button>
+
+</div>
+
+</div>

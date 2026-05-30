@@ -1,0 +1,184 @@
+<section class="savings-page">
+  <div class="card">
+    <h1>Savings Account</h1>
+    <p class="subtitle">Save money separately and create personal saving goals.</p>
+
+    <div class="savings-grid">
+      <div class="saving-box ron">
+        <h3>🇷🇴 RON Savings</h3>
+        <p>{{ ronSavings }} RON</p>
+      </div>
+
+      <div class="saving-box eur">
+        <h3>🇪🇺 EUR Savings</h3>
+        <p>{{ eurSavings }} EUR</p>
+      </div>
+    </div>
+
+    <div class="section-title">Add money to savings</div>
+
+    <div class="form-card">
+      <div class="form">
+        <label class="field">
+          <span>Amount</span>
+          <input
+            type="number"
+            [(ngModel)]="newSaving.amount"
+            placeholder="0"
+          />
+        </label>
+
+        <div class="field">
+          <span>Choose savings account</span>
+
+          <div class="currency-switch">
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newSaving.currency === 'RON'"
+              (click)="newSaving.currency = 'RON'"
+            >
+              🇷🇴 RON
+            </button>
+
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newSaving.currency === 'EUR'"
+              (click)="newSaving.currency = 'EUR'"
+            >
+              🇪🇺 EUR
+            </button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Date</span>
+          <input
+            type="date"
+            [(ngModel)]="newSaving.date"
+          />
+        </label>
+
+        <button class="btn" type="button" (click)="addSaving()">
+          Add to Savings
+        </button>
+      </div>
+    </div>
+
+    <div class="section-title">Create saving goal</div>
+
+    <div class="form-card">
+      <div class="form">
+        <label class="field">
+          <span>Goal name</span>
+          <input
+            type="text"
+            [(ngModel)]="newGoal.name"
+            placeholder="Ex: Vacation / Car / House"
+          />
+        </label>
+
+        <label class="field">
+          <span>Target amount</span>
+          <input
+            type="number"
+            [(ngModel)]="newGoal.targetAmount"
+            placeholder="0"
+          />
+        </label>
+
+        <div class="field">
+          <span>Goal currency</span>
+
+          <div class="currency-switch">
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newGoal.currency === 'RON'"
+              (click)="newGoal.currency = 'RON'"
+            >
+              🇷🇴 RON
+            </button>
+
+            <button
+              type="button"
+              class="currency-btn"
+              [class.active]="newGoal.currency === 'EUR'"
+              (click)="newGoal.currency = 'EUR'"
+            >
+              🇪🇺 EUR
+            </button>
+          </div>
+        </div>
+
+        <button class="btn" type="button" (click)="addGoal()">
+          Create Goal
+        </button>
+      </div>
+    </div>
+
+    <div class="section-title">Saving goals progress</div>
+
+    <div class="goals-list" *ngIf="goals.length > 0; else emptyGoals">
+      <div class="goal-card" *ngFor="let goal of goals">
+        <div class="goal-header">
+          <div>
+            <strong>🎯 {{ goal.name }}</strong>
+            <p>
+              Target:
+              {{ goal.targetAmount }}
+              <span *ngIf="goal.currency === 'RON'">🇷🇴 RON</span>
+              <span *ngIf="goal.currency === 'EUR'">🇪🇺 EUR</span>
+            </p>
+          </div>
+
+          <button class="delete-btn" (click)="deleteGoal(goal._id!)">
+            Delete
+          </button>
+        </div>
+
+        <div class="progress-info">
+          <span>
+            Saved:
+            {{ getSavedAmountForGoal(goal) }}
+            {{ goal.currency }}
+          </span>
+
+          <span>
+            Remaining:
+            {{ getRemainingAmount(goal) }}
+            {{ goal.currency }}
+          </span>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [style.width.%]="getProgress(goal)"
+          ></div>
+        </div>
+
+        <p class="progress-percent">
+          {{ getProgress(goal) }}% completed
+        </p>
+
+        <div class="goal-recommendation">
+          <span *ngIf="getRemainingAmount(goal) > 0">
+            💡 Recommendation: save about
+            <strong>{{ getMonthlyRecommendation(goal) }} {{ goal.currency }}</strong>
+            per month to reach this goal in about 6 months.
+          </span>
+
+          <span *ngIf="getRemainingAmount(goal) === 0">
+            ✅ Goal completed! Great job.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyGoals>
+      <p class="empty">No savings goals yet.</p>
+    </ng-template>
+  </div>
+</section>

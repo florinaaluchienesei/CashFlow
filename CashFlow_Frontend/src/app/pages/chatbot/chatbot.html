@@ -1,0 +1,43 @@
+<div class="cashbot-wrapper">
+  <button class="chat-icon" type="button" (click)="toggleChat()">
+    🤖
+  </button>
+
+  <div class="chat-popup" *ngIf="isOpen">
+    <div class="chat-header">
+      <div>
+        <strong>CashBot</strong>
+        <p>Your finance assistant</p>
+      </div>
+
+      <button class="close-btn" type="button" (click)="toggleChat()">×</button>
+    </div>
+
+    <div class="bot-message">
+      Hi! I can help you understand your money better.
+    </div>
+
+    <div class="quick-buttons">
+      <button type="button" (click)="askBot('money')">
+        💰 How are my finances?
+      </button>
+
+      <button type="button" (click)="askBot('saving')">
+        🏦 Can I save?
+      </button>
+
+      <button type="button" (click)="askBot('expense')">
+        📉 Too many expenses?
+      </button>
+
+      <button type="button" (click)="askBot('goal')">
+        🎯 Savings goal
+      </button>
+    </div>
+
+    <div class="response" *ngIf="answer">
+      <strong>CashBot says:</strong>
+      <p>{{ answer }}</p>
+    </div>
+  </div>
+</div>
