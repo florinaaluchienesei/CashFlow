@@ -2,9 +2,11 @@
   <div class="navbar-inner">
     <div class="logo">CashFlow</div>
 
-    <div class="nav-links">
+    <div class="nav-links" *ngIf="auth.isLoggedIn()">
+      <a routerLink="/dashboard">Dashboard</a>
       <a routerLink="/transactions">Transactions</a>
       <a routerLink="/balance">Balance</a>
+      <a routerLink="/savings">Savings</a>
     </div>
 
     <div class="auth">
@@ -12,6 +14,7 @@
       <a routerLink="/register" *ngIf="!auth.isLoggedIn()">Register</a>
 
       <span class="hello" *ngIf="auth.isLoggedIn()">Hello!</span>
+
       <button class="logout" *ngIf="auth.isLoggedIn()" (click)="logout()">
         Logout
       </button>
@@ -21,4 +24,6 @@
 
 <div class="page">
   <router-outlet></router-outlet>
+
+  <app-chatbot *ngIf="auth.isLoggedIn()"></app-chatbot>
 </div>

@@ -129,3 +129,40 @@ h1 {
   max-width: 430px;
   margin: 0 auto;
 }
+.recommendation-card {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(110, 231, 183, 0.18);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.10);
+  text-align: center;
+}
+
+.recommendation-card h3 {
+  color: #ecfdf5;
+  margin-bottom: 10px;
+}
+
+.recommendation-card h4 {
+  color: #34d399;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.recommendation-card p {
+  color: #cfe8dd;
+  line-height: 1.5;
+}
+
+.saving-suggestion {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #d1fae5;
+}
+
+.saving-suggestion strong {
+  color: #4ade80;
+}

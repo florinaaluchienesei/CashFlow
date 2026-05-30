@@ -31,6 +31,18 @@
           </select>
         </label>
 
+        <label class="field">
+          <span>Category</span>
+          <select [(ngModel)]="newTransaction.category">
+            <option value="Food">🍔 Food</option>
+            <option value="Transport">🚗 Transport</option>
+            <option value="Bills">🧾 Bills</option>
+            <option value="Shopping">🛍️ Shopping</option>
+            <option value="Salary">💼 Salary</option>
+            <option value="Other">📌 Other</option>
+          </select>
+        </label>
+
         <div class="field">
           <span>Choose account</span>
           <div class="currency-switch">
@@ -68,8 +80,46 @@
       </div>
     </div>
 
-    <div class="list" *ngIf="transactions.length > 0; else emptyState">
-      <div class="transaction-item" *ngFor="let transaction of transactions">
+    <div class="filter-buttons">
+      <button type="button" [class.active]="selectedFilter === 'all'" (click)="selectedFilter = 'all'">
+        All
+      </button>
+
+      <button type="button" [class.active]="selectedFilter === 'income'" (click)="selectedFilter = 'income'">
+        Income
+      </button>
+
+      <button type="button" [class.active]="selectedFilter === 'expense'" (click)="selectedFilter = 'expense'">
+        Expense
+      </button>
+
+      <button type="button" [class.active]="selectedFilter === 'RON'" (click)="selectedFilter = 'RON'">
+        🇷🇴 RON
+      </button>
+
+      <button type="button" [class.active]="selectedFilter === 'EUR'" (click)="selectedFilter = 'EUR'">
+        🇪🇺 EUR
+      </button>
+    </div>
+
+    <div class="date-filters">
+      <label class="field">
+        <span>From date</span>
+        <input type="date" [(ngModel)]="fromDate" />
+      </label>
+
+      <label class="field">
+        <span>To date</span>
+        <input type="date" [(ngModel)]="toDate" />
+      </label>
+    </div>
+
+    <button class="pdf-btn" type="button" (click)="downloadStatement()">
+      Download Filtered PDF Statement
+    </button>
+
+    <div class="list" *ngIf="getFilteredTransactions().length > 0; else emptyState">
+      <div class="transaction-item" *ngFor="let transaction of getFilteredTransactions()">
         <div class="transaction-left">
           <div class="transaction-icon" [ngClass]="transaction.type">
             <span *ngIf="transaction.type === 'income'">💰</span>
@@ -79,8 +129,7 @@
           <div class="transaction-info">
             <strong>{{ transaction.title }}</strong>
             <p>
-              {{ transaction.date }} •
-
+              {{ transaction.date }} • {{ transaction.category }} •
               <span *ngIf="transaction.currency === 'RON'">🇷🇴 RON</span>
               <span *ngIf="transaction.currency === 'EUR'">🇪🇺 EUR</span>
             </p>
@@ -102,7 +151,16 @@
     </div>
 
     <ng-template #emptyState>
-      <p class="empty">No transactions yet.</p>
+      <p class="empty">No transactions for this filter.</p>
     </ng-template>
+
+    <div class="category-chart-card">
+      <h2>Expense Categories</h2>
+      <p>See where your money goes.</p>
+
+      <div class="category-chart-box">
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
   </div>
 </section>

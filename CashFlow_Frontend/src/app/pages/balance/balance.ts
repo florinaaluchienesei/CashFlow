@@ -25,6 +25,9 @@ export class Balance implements OnInit {
   eurIncome = 0;
   eurExpense = 0;
   eurBalance = 0;
+  recommendationTitle = '';
+  recommendationText = '';
+  recommendedSaving = 0;
 
   constructor(
     private auth: AuthService,
@@ -51,6 +54,7 @@ export class Balance implements OnInit {
         this.eurBalance = data.eurBalance;
 
         this.createChart();
+        this.generateRecommendation();
       },
       error: (err) => {
         console.log('Eroare balance:', err);
@@ -61,6 +65,7 @@ export class Balance implements OnInit {
   selectCurrency(currency: 'RON' | 'EUR'): void {
     this.selectedCurrency = currency;
     this.createChart();
+    this.generateRecommendation();
   }
 
   createChart(): void {
@@ -100,4 +105,38 @@ export class Balance implements OnInit {
       }
     });
   }
+
+  generateRecommendation(): void {
+  const isRon = this.selectedCurrency === 'RON';
+
+  const income = isRon ? this.ronIncome : this.eurIncome;
+  const expense = isRon ? this.ronExpense : this.eurExpense;
+  const balance = isRon ? this.ronBalance : this.eurBalance;
+  const currency = isRon ? 'RON' : 'EUR';
+
+  this.recommendedSaving = Math.round(balance * 0.1);
+
+  if (income === 0 && expense === 0) {
+    this.recommendationTitle = 'No data yet';
+    this.recommendationText = 'Add some transactions to receive financial recommendations.';
+    this.recommendedSaving = 0;
+    return;
+  }
+
+  if (expense > income) {
+    this.recommendationTitle = 'Warning';
+    this.recommendationText = `Your expenses are higher than your income. Try reducing spending this month.`;
+    this.recommendedSaving = 0;
+    return;
+  }
+
+  if (balance > 0) {
+    this.recommendationTitle = 'Good job';
+    this.recommendationText = `You have a positive balance. You could move about ${this.recommendedSaving} ${currency} to Savings.`;
+    return;
+  }
+
+  this.recommendationTitle = 'Be careful';
+  this.recommendationText = 'Your balance is low. Try to reduce expenses before saving.';
+}
 }

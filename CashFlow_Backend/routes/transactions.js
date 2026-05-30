@@ -60,7 +60,8 @@ router.post('/', async (req, res) => {
       type,
       date,
       userId,
-      currency
+      currency,
+      category
     });
 
     await transaction.save();

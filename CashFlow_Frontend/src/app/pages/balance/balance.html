@@ -64,5 +64,20 @@
     <div class="chart-box">
       <canvas id="balanceChart"></canvas>
     </div>
+    <div class="recommendation-card">
+      <h3>💡 Smart Recommendation</h3>
+
+      <h4>{{ recommendationTitle }}</h4>
+
+      <p>{{ recommendationText }}</p>
+
+      <div class="saving-suggestion" *ngIf="recommendedSaving > 0">
+        Suggested saving:
+        <strong>
+          {{ recommendedSaving }}
+          {{ selectedCurrency }}
+        </strong>
+      </div>
+    </div>
   </div>
 </section>

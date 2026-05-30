@@ -1,0 +1,125 @@
+.cashbot-wrapper {
+  position: fixed;
+  left: 24px;
+  bottom: 32px;
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.chat-icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  background: linear-gradient(135deg, #34d399, #10b981);
+  box-shadow: 0 14px 34px rgba(16, 185, 129, 0.38);
+  transition: 0.2s ease;
+}
+
+.chat-icon:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.chat-popup {
+  width: 340px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(6, 17, 13, 0.97);
+  border: 1px solid rgba(110, 231, 183, 0.22);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.48);
+  color: #ecfdf5;
+  animation: openChat 0.2s ease-out;
+}
+
+@keyframes openChat {
+  from {
+    opacity: 0;
+    transform: translateX(-12px) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.chat-header strong {
+  font-size: 18px;
+  color: #ecfdf5;
+}
+
+.chat-header p {
+  margin-top: 4px;
+  color: #b7d8cb;
+  font-size: 13px;
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  color: #ecfdf5;
+  font-size: 26px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.bot-message {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(110, 231, 183, 0.16);
+  color: #d1fae5;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.quick-buttons {
+  display: grid;
+  gap: 10px;
+}
+
+.quick-buttons button {
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(110, 231, 183, 0.13);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ecfdf5;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.quick-buttons button:hover {
+  background: rgba(16, 185, 129, 0.12);
+  transform: translateX(2px);
+}
+
+.response {
+  margin-top: 14px;
+  padding: 13px;
+  border-radius: 15px;
+  background: rgba(52, 211, 153, 0.10);
+  border: 1px solid rgba(110, 231, 183, 0.16);
+}
+
+.response strong {
+  color: #6ee7b7;
+}
+
+.response p {
+  margin-top: 6px;
+  color: #cfe8dd;
+  line-height: 1.5;
+}
