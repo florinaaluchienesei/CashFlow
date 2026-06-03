@@ -9,6 +9,7 @@ import { Transaction } from './transaction';
 
 import { Chart, registerables } from 'chart.js';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 Chart.register(...registerables);
 
@@ -21,7 +22,7 @@ Chart.register(...registerables);
 })
 export class Transactions implements OnInit {
   transactions: Transaction[] = [];
-  selectedFilter: 'all' | 'income' | 'expense' | 'RON' | 'EUR' = 'all';
+  selectedFilter: 'all' | 'income' | 'expense' | 'RON' | 'EUR' = 'all' ;
 
   fromDate = '';
   toDate = '';
@@ -232,6 +233,7 @@ export class Transactions implements OnInit {
       userId: user._id || user.id
     };
 
+    console.log(transactionToAdd);
     this.transactionService.addTransaction(transactionToAdd).subscribe({
       next: () => {
         this.loadTransactions();

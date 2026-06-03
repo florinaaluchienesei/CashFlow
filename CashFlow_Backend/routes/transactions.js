@@ -52,7 +52,7 @@ router.get('/:userId', async (req, res) => {
 // ADD transaction
 router.post('/', async (req, res) => {
   try {
-    const { title, amount, type, date, userId, currency } = req.body;
+    const { title, amount, type, date, userId, currency,  category} = req.body;
 
     const transaction = new Transaction({
       title,

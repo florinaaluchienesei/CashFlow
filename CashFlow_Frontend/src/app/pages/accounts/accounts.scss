@@ -1,0 +1,58 @@
+.accounts-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+
+.accounts-page h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.create-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.create-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.create-form input,
+.create-form select {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+  gap: 20px;
+}
+
+.account-card {
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(110,231,183,0.15);
+}
+
+.account-card h3 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.account-card p {
+  color: #b7d8cb;
+  margin-bottom: 10px;
+}
+
+.account-card strong {
+  color: #34d399;
+  font-size: 22px;
+}

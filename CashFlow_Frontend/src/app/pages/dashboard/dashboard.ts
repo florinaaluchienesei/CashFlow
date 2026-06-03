@@ -6,11 +6,13 @@ import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
 import { SavingService } from '../../services/saving.service';
 import { SavingGoalService } from '../../services/saving-goal.service';
+import { VirtualCard } from '../../components/virtual-card/virtual-card';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule,VirtualCard],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })
@@ -22,6 +24,38 @@ export class Dashboard implements OnInit {
   eurSavings = 0;
 
   goalsCount = 0;
+      accounts = [
+      {
+        name: 'Personal Account',
+        type: 'personal',
+        balanceRON: 5200
+      }
+    ];
+
+    showCreateAccount = false;
+
+    newAccount = {
+      name: '',
+      type: 'personal',
+      balanceRON: 0
+    };
+
+    createAccount() {
+
+      if (!this.newAccount.name.trim()) return;
+
+      this.accounts.push({
+        ...this.newAccount
+      });
+
+      this.newAccount = {
+        name: '',
+        type: 'personal',
+        balanceRON: 0
+      };
+
+      this.showCreateAccount = false;
+    }
 
   recommendation = '';
 

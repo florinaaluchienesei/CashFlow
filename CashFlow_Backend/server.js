@@ -8,12 +8,14 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const transactionRoutes = require('./routes/transactions');
 const savingsRoutes = require('./routes/savings');
+const accountRoutes = require('./routes/accounts');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use('/api/savings', savingsRoutes);
+app.use('/accounts', accountRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))

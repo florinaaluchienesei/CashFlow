@@ -8,6 +8,7 @@ import { Savings } from './pages/savings/savings';
 import { Chatbot } from './pages/chatbot/chatbot';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { VirtualCard } from './components/virtual-card/virtual-card';
+import { Accounts } from './pages/accounts/accounts';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -19,4 +20,5 @@ export const routes: Routes = [
   {path:'chatbot',component:Chatbot},
   {path:'dashboard',component: Dashboard},
   { path: 'virtual-card', component: VirtualCard },
+  {path: 'accounts', component: Accounts},
 ];

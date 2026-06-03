@@ -1,0 +1,65 @@
+<p>acco<section class="accounts-page">
+
+  <h1>My Accounts</h1>
+
+  <button
+    class="create-btn"
+    (click)="showCreateForm = !showCreateForm"
+  >
+    + Create Account
+  </button>
+
+  <div
+    class="create-form"
+    *ngIf="showCreateForm"
+  >
+
+    <input
+      type="text"
+      placeholder="Account Name"
+      [(ngModel)]="newAccount.name"
+    >
+
+    <select
+      [(ngModel)]="newAccount.type"
+    >
+      <option value="personal">
+        Personal
+      </option>
+
+      <option value="child">
+        Child
+      </option>
+
+      <option value="business">
+        Business
+      </option>
+    </select>
+
+    <button
+      (click)="createAccount()"
+    >
+      Save
+    </button>
+
+  </div>
+
+  <div class="accounts-grid">
+
+    <div
+      class="account-card"
+      *ngFor="let account of accounts"
+    >
+
+      <h3>{{ account.name }}</h3>
+
+      <p>{{ account.type }}</p>
+
+      <strong>
+        {{ account.balanceRON }} RON
+      </strong>
+
+    </div>
+
+  </div>
+

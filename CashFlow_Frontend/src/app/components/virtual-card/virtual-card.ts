@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Input } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-virtual-card',
@@ -10,19 +12,27 @@ import { CommonModule } from '@angular/common';
 })
 export class VirtualCard {
 
+  @Input() balance = 0;
+
   cardStatus = true;
 
-  cardNumber =
-    '4582 7812 9945 1120';
+  cardNumber = '4582 7812 9945 1120';
 
-  cardHolder =
-    'CashFlow User';
+  cardHolder = '';
 
-  balance =
-    5200;
+  constructor(
+    private authService: AuthService
+  ) {
+
+    const user = this.authService.getUser();
+
+    if (user) {
+      this.cardHolder = user.name;
+    }
+
+  }
 
   toggleCard(): void {
-    this.cardStatus =
-      !this.cardStatus;
+    this.cardStatus = !this.cardStatus;
   }
 }

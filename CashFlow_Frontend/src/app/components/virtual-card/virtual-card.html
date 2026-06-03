@@ -1,61 +1,47 @@
 <div class="card-wrapper">
 
-<div class="bank-card">
+  <div class="bank-card">
 
-<div class="chip"></div>
+    <div class="chip"></div>
 
-<h2>CashFlow Premium</h2>
+    <h2>CashFlow Premium</h2>
 
-<p class="number">
-{{ cardNumber }}
-</p>
+    <p class="number">
+      {{ cardNumber }}
+    </p>
 
-<div class="bottom">
+    <div class="bottom">
 
-<div>
-<span>Holder</span>
+      <div>
+        <span>Holder </span>
+        <strong>{{ cardHolder }}</strong>
+      </div>
 
-<strong>
-{{ cardHolder }}
-</strong>
-</div>
+      <div>
+        <span>Balance </span>
+        <strong>{{ balance }} RON</strong>
+      </div>
 
-<div>
-<span>Balance</span>
+    </div>
 
-<strong>
-{{ balance }} RON
-</strong>
-</div>
+    <div class="status">
 
-</div>
+      <p>
+        Status:
+        <span
+          [class.active]="cardStatus"
+          [class.blocked]="!cardStatus"
+        >
+          {{ cardStatus ? 'Active' : 'Blocked' }}
+        </span>
+      </p>
 
-</div>
+      <button (click)="toggleCard()">
+        {{ cardStatus ? 'Freeze Card' : 'Unfreeze Card' }}
+      </button>
 
-<div class="status">
+    </div>
 
-<p>
-
-Status:
-
-<span
-[class.active]="cardStatus"
-[class.blocked]="!cardStatus"
->
-
-{{ cardStatus ? 'Active' : 'Blocked' }}
-
-</span>
-
-</p>
-
-<button
-(click)="toggleCard()">
-
-{{ cardStatus ? 'Freeze Card' : 'Unfreeze Card' }}
-
-</button>
-
-</div>
+  </div>
 
 </div>
